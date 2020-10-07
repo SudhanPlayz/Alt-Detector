@@ -1,9 +1,12 @@
+  
 const Discord = require("discord.js")
-const db = require("../database")
+const db = require('../database');
 let cooldown = new Set();
 const config = require('../config')
 
 module.exports.run = async(client, message, member) => {
+
+if(message.member.hasPermission("ADMINISTRATOR")) {
 
   if(cooldown.has(message.author.id)) {
     message = await
@@ -91,10 +94,10 @@ if(xd.reactions.cache.size !== null) return
   setTimeout(() => {
       cooldown.delete(message.author.id);
   }, config.COOLDOWN * 60 * 1000);
+}
   } 
   module.exports.help = {
       name: "auto-setup",
       aliases: ['autosetup'],
       description: "autosetup the bot"
     }
-  
